@@ -32,15 +32,24 @@ char* hexStringToBase64String(char* hexString){
    
       convertThreeHexToBase64(b, base64, j);
       j += 2;
+      free(b);
    }
-
-   free(b);
+   
    return base64;
 }
 
 int main () {
-   printf("%s\n", hexStringToBase64String("f6d"));
-   printf("%s\n", hexStringToBase64String("6f6f6d"));
+   char* b64String;
    
-   printf("%s\n", hexStringToBase64String("49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"));
+   b64String = hexStringToBase64String("f6d");
+   printf("%s\n", b64String);
+   free(b64String);
+
+   b64String = hexStringToBase64String("6f6f6d");
+   printf("%s\n", b64String);
+   free(b64String);
+
+   b64String = hexStringToBase64String("49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d");
+   printf("%s\n", b64String);
+   free(b64String);
 }
