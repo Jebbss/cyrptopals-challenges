@@ -1,13 +1,12 @@
 #ifndef _XOR_CIPHER_
 #define _XOR_CIPHER_
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 void createScoreTable(int* scoreTable){
-    for(int j = 0; j < 128; j++){
+    for(int j = 0; j < 256; j++){
         scoreTable[j] = 0;
     }
 
@@ -107,6 +106,23 @@ int scoreCipherKey(char key, char* ciphered, int* scoreTable){
         score += scoreTable[decipheredChar];
     }
     return score;
+}
+
+int scoreLine(char* line, char* bestScoringChar, int* scoreTable){
+    int ret = 0;
+    int max = 0;
+    char maxChar = 0;
+
+    for(int i = 0; i < 127; i++){
+        ret = 0;
+        ret = scoreCipherKey(i, line, scoreTable);
+  
+        if (ret > max){
+            max = ret;
+            (*bestScoringChar) = i;
+        }
+    }
+    return max;
 }
 
 #endif /* _XOR_CIPHER_ */

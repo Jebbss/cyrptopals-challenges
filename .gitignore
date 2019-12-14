@@ -1,4 +1,6 @@
 
 *hexToBase64
-baisics/xorCipher
+*detectSingleCharXor
+*xorCipher
+
 .vscode/settings.json
