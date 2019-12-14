@@ -112,7 +112,7 @@ int main(){
     int scoreTable[127];
     createScoreTable(scoreTable);
 
-    for(int i = 48; i < 123; i++){
+    for(int i = 0; i < 127; i++){
         ret = 0;
         ret = scoreCipherKey(i, "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736", scoreTable);
   
