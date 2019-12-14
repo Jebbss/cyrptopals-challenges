@@ -3,6 +3,10 @@
 #include <string.h>
 
 void createScoreTable(int* scoreTable){
+    for(int j = 0; j < 128; j++){
+        scoreTable[j] = 0;
+    }
+
     scoreTable['E'] = 26;
     scoreTable['e'] = 26;
 
@@ -89,18 +93,13 @@ int scoreCipherKey(char key, char* ciphered, int* scoreTable){
     char* twoChars = malloc(sizeof(char)*3);
     *(twoChars + 2) = '\0'; 
     
-    char decipheredChar;
+    int decipheredChar;
 
     for(int i = 0; i < lengthOfCiphered; i+=2){
         *twoChars = ciphered[i];
         *(twoChars + 1) = ciphered[i+1];
 
         decipheredChar = (key ^ strtol(twoChars, NULL, 16));
-  
-        if(decipheredChar > 0 && decipheredChar < 127){
-            return 0;
-        }
-
         score += scoreTable[decipheredChar];
     }
     return score;
@@ -109,15 +108,15 @@ int scoreCipherKey(char key, char* ciphered, int* scoreTable){
 int main(){
     int ret = 0;
     int max = 0;
-    char maxChar = 88;
+    char maxChar = 0;
     int scoreTable[127];
     createScoreTable(scoreTable);
 
-    for(int i = 0; i < 128; i++){
+    for(int i = 48; i < 123; i++){
         ret = 0;
         ret = scoreCipherKey(i, "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736", scoreTable);
+  
         if (ret > max){
-            printf("%d\n", ret);
             max = ret;
             maxChar = i;
         }
