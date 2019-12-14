@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int* createScoreTable(int* scoreTable){
+void createScoreTable(int* scoreTable){
     scoreTable['E'] = 26;
     scoreTable['e'] = 26;
 
@@ -80,16 +80,14 @@ int* createScoreTable(int* scoreTable){
 
     scoreTable['Z'] = 1;
     scoreTable['z'] = 1;
-
-    return scoreTable;
 }
 
 int scoreCipherKey(char key, char* ciphered, int* scoreTable){
     int score = 0;
     int lengthOfCiphered = strlen(ciphered);
+    
     char* twoChars = malloc(sizeof(char)*3);
     *(twoChars + 2) = '\0'; 
-    
     
     char decipheredChar;
 
@@ -102,7 +100,7 @@ int scoreCipherKey(char key, char* ciphered, int* scoreTable){
         if(decipheredChar > 0 && decipheredChar < 127){
             return 0;
         }
-        
+
         score += scoreTable[decipheredChar];
     }
     return score;
@@ -114,7 +112,6 @@ int main(){
     char maxChar = 88;
     int scoreTable[127];
     createScoreTable(scoreTable);
-    printf("%d\n", scoreTable['E']);
 
     for(int i = 0; i < 128; i++){
         ret = 0;
@@ -125,5 +122,5 @@ int main(){
             maxChar = i;
         }
     }
-    printf("%c\n", maxChar);
+    printf("%c is the key\n", maxChar);
 }
