@@ -87,6 +87,26 @@ void createScoreTable(int* scoreTable){
 
     scoreTable['Z'] = 1;
     scoreTable['z'] = 1;
+
+    // scoreTable[' '] = 1;
+}
+
+void printDecipheredLine(char key, char* line){
+    int lengthOfCiphered = strlen(line);
+    
+    char* twoChars = malloc(sizeof(char)*3);
+    *(twoChars + 2) = '\0'; 
+    
+    int decipheredChar;
+
+    for(int i = 0; i < lengthOfCiphered; i+=2){
+        *twoChars = line[i];
+        *(twoChars + 1) = line[i+1];
+
+        decipheredChar = (key ^ strtol(twoChars, NULL, 16));
+        printf("%c", decipheredChar);
+    }
+    printf("\n");
 }
 
 int scoreCipherKey(char key, char* ciphered, int* scoreTable){
